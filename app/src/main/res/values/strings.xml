@@ -1,12 +1,9 @@
 <resources>
     <string name="app_name">Natife_first</string>
-
     <string name="text_example_name">Something name</string>
     <string name="text_example_description">Some description for the given list item,
             who invented it and why? But it had to be so, otherwise, how else can you see all the
             beauty of this view if there is not a sufficient description size? Here it is.
             Well , not a bad example of a description , right ? Well , the sample text should be longer ,
             I hope you have not read it here yet . An example of sample text, this should be enough, just increase its size.</string>
-
-
 </resources>
