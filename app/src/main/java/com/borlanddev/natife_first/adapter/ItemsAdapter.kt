@@ -9,10 +9,11 @@ import com.borlanddev.natife_first.databinding.ItemListBinding
 class ItemsAdapter(private var items: List<Item>, var onItemClick: (Item) -> Unit) :
     RecyclerView.Adapter<ItemHolder>() {
 
+    override fun getItemCount(): Int = items.size
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemListBinding.inflate(inflater, parent, false)
-
         return ItemHolder(binding)
     }
 
@@ -20,16 +21,15 @@ class ItemsAdapter(private var items: List<Item>, var onItemClick: (Item) -> Uni
         val item = items[position]
         holder.bind(item, onItemClick)
     }
-
-    override fun getItemCount(): Int = items.size
 }
 
 class ItemHolder(private val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Item, onItemClick: (Item) -> Unit) {
-
         binding.recyclerItemTextView.text = item.name
-        binding.recyclerItemTextView.setOnClickListener { onItemClick.invoke(item) }
+        binding.recyclerItemTextView.setOnClickListener {
+            onItemClick.invoke(item)
+        }
     }
 
 }
