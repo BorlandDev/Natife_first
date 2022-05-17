@@ -6,4 +6,7 @@
             beauty of this view if there is not a sufficient description size? Here it is.
             Well , not a bad example of a description , right ? Well , the sample text should be longer ,
             I hope you have not read it here yet . An example of sample text, this should be enough, just increase its size.</string>
+    <string name="notification_channel_name">Default channel</string>
+    <string name="notification_title">Click me!</string>
+    <string name="notification_text">No, I am serious, click already!</string>
 </resources>
