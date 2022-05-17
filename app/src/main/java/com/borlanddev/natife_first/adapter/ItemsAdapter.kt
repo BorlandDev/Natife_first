@@ -2,15 +2,11 @@ package com.borlanddev.natife_first.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
-import com.borlanddev.natife_first.R
 import com.borlanddev.natife_first.data.Item
 import com.borlanddev.natife_first.databinding.ItemListBinding
-import com.borlanddev.natife_first.screens.ListFragmentDirections
 
-class ItemsAdapter(private var items: List<Item>) :
+class ItemsAdapter(private var items: List<Item>, var onItemClick: (Item) -> Unit) :
     RecyclerView.Adapter<ItemHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
@@ -22,30 +18,18 @@ class ItemsAdapter(private var items: List<Item>) :
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val item = items[position]
-        with(holder.binding) { recyclerItemTextView.text = item.name }
-        holder.bind(item)
+        holder.bind(item, onItemClick)
     }
 
     override fun getItemCount(): Int = items.size
 }
 
-class ItemHolder(val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
+class ItemHolder(private val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Item) {
-        binding.recyclerItemTextView.setOnClickListener {
+    fun bind(item: Item, onItemClick: (Item) -> Unit) {
 
-            val direction = ListFragmentDirections.actionListFragmentToDetailsFragment(item.id)
-            itemView.findNavController().navigate(
-                direction,
-                navOptions {
-                    anim {
-                        enter = R.anim.enter
-                        exit = R.anim.exit
-                        popEnter = R.anim.pop_enter
-                        popExit = R.anim.pop_exit
-                    }
-                })
-            }
-        }
+        binding.recyclerItemTextView.text = item.name
+        binding.recyclerItemTextView.setOnClickListener { onItemClick.invoke(item) }
+    }
 
 }
