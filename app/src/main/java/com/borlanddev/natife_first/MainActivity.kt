@@ -5,6 +5,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(broadcastReceiver, filter)
 
-        val lastID = intent.extras?.getInt("lastID")
+        val lastID = getIntent().extras?.getInt("lastID")
 
         if (lastID != -1 && lastID in 0..19) {
 
