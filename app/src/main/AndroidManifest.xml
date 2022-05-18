@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.borlanddev.natife_first">
 
+    <permission
+        android:name="com.borlanddev.natife_first.PRIVATE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="com.borlanddev.natife_first.PRIVATE" />
 
     <application
         android:name=".NatifeFirstApplication"
@@ -21,6 +26,16 @@
             android:name=".services.MyService"
             android:enabled="true"
             android:exported="false" />
+
+        <receiver
+            android:name=".broadcastReceivers.MyBroadcastReceiver"
+            android:exported="true"
+            android:permission="com.borlanddev.natife_first.PRIVATE">
+            <intent-filter>
+                <action android:name="com.borlanddev.natife_first.MY_ACTION" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

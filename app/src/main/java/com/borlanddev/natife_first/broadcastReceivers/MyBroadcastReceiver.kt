@@ -16,8 +16,8 @@ class MyBroadcastReceiver : BroadcastReceiver() {
 
         val intentForMainActivity = Intent(context, MainActivity::class.java).apply {
             putExtra("lastID", lastID)
+            Intent.FLAG_ACTIVITY_NEW_TASK
         }
-
         context?.startActivity(intentForMainActivity)
     }
 }

@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         registerReceiver(broadcastReceiver, filter)
-
     }
 
     override fun onSupportNavigateUp(): Boolean =
