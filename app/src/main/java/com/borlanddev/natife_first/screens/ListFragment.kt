@@ -13,8 +13,8 @@ import com.borlanddev.natife_first.adapter.ItemsAdapter
 import com.borlanddev.natife_first.data.ItemList
 import com.borlanddev.natife_first.databinding.FragmentListBinding
 
-private const val APP_PREFERENCES = "APP_PREFERENCES"
-private const val PREF_ID = "PREF_ID"
+const val APP_PREFERENCES = "APP_PREFERENCES"
+const val PREF_ID = "PREF_ID"
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var binding: FragmentListBinding
