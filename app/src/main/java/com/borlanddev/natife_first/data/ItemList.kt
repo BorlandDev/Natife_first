@@ -1,7 +1,5 @@
 package com.borlanddev.natife_first.data
 
-import java.nio.file.Files.find
-
 object ItemList {
     val items: List<Item> by lazy {
         (0 until 20).map {
@@ -17,7 +15,6 @@ object ItemList {
         }
     }
 
-    fun getById(id: Int): Item? = items.find { item -> item.id == id }
-
+    fun getById(id: Int): Item? = items.find { it.id == id }
 
 }

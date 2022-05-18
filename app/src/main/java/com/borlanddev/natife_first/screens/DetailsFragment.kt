@@ -15,16 +15,14 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentDetailsBinding.bind(view)
 
-        val itemID = args.id
-        val currentItem = ItemList.items[itemID]
+        val currentItem = ItemList.getById(args.id)
 
         with(binding) {
-            itemId.text = currentItem.id.toString()
-            itemTextName.text = currentItem.name
-            itemDescriptionNote.text = currentItem.description
+            itemId.text = currentItem?.id.toString()
+            itemTextName.text = currentItem?.name
+            itemDescriptionNote.text = currentItem?.description
         }
     }
 }

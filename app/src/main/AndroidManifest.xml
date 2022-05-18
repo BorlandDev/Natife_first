@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.borlanddev.natife_first">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:name=".NatifeFirstApplication"
         android:allowBackup="true"
@@ -14,6 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Natife_first"
         tools:targetApi="31">
+
+        <service
+            android:name=".services.MyService"
+            android:enabled="true"
+            android:exported="false"
+            />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
