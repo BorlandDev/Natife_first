@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.borlanddev.natife_first.data.Item
 import com.borlanddev.natife_first.databinding.ItemListBinding
 
-class ItemsAdapter(private var items: List<Item>, var onItemClick: (Item) -> Unit) :
+class ItemsAdapter(private var items: List<Item>, private var onItemClick: (Item) -> Unit) :
     RecyclerView.Adapter<ItemHolder>() {
 
     override fun getItemCount(): Int = items.size

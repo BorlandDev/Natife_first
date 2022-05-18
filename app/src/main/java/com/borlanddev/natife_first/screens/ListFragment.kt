@@ -49,9 +49,9 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                             popExit = R.anim.pop_exit
                         }
                     })
-                }
             }
         }
+    }
 
 
 }
