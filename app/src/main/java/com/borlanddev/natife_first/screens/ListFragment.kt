@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.borlanddev.natife_first.helpers.APP_PREFERENCES
+import com.borlanddev.natife_first.helpers.PREF_ID
 import com.borlanddev.natife_first.R
 import com.borlanddev.natife_first.adapter.ItemsAdapter
 import com.borlanddev.natife_first.data.ItemList
-import com.borlanddev.natife_first.databinding.FragmentListBinding
 
-const val APP_PREFERENCES = "APP_PREFERENCES"
-const val PREF_ID = "PREF_ID"
+import com.borlanddev.natife_first.databinding.FragmentListBinding
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var binding: FragmentListBinding

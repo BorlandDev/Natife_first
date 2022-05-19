@@ -10,6 +10,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import androidx.navigation.ui.NavigationUI
 import com.borlanddev.natife_first.broadcastReceivers.MyBroadcastReceiver
+import com.borlanddev.natife_first.helpers.KEY_LAST_ID
+import com.borlanddev.natife_first.helpers.MY_ACTION
 import com.borlanddev.natife_first.screens.ListFragmentDirections
 import com.borlanddev.natife_first.services.MyService
 
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val lastID = intent.extras?.getInt("lastID")
+        val lastID = intent.extras?.getInt(KEY_LAST_ID)
 
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
@@ -42,16 +44,15 @@ class MainActivity : AppCompatActivity() {
                 })
         }
 
-
-        val intent = Intent(this, MyService::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val intentForService = Intent(this, MyService::class.java)
+            startForegroundService(intentForService)
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) startForegroundService(intent)
 
         broadcastReceiver = MyBroadcastReceiver()
 
         val filter = IntentFilter().apply {
-            addAction(MyService.MY_ACTION)
+            addAction(MY_ACTION)
         }
 
         registerReceiver(broadcastReceiver, filter)

@@ -1,11 +1,10 @@
-package com.borlanddev.natife_first
+package com.borlanddev.natife_first.helpers
 
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
-
-const val NOTIFICATION_CHANNEL_ID = "Default channel"
+import com.borlanddev.natife_first.R
 
 class NatifeFirstApplication : Application() {
 
@@ -24,10 +23,7 @@ class NatifeFirstApplication : Application() {
 
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
-
         }
-
-
     }
 }
 
