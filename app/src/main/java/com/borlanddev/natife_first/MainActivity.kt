@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -14,10 +15,12 @@ import com.borlanddev.natife_first.helpers.KEY_LAST_ID
 import com.borlanddev.natife_first.helpers.MY_ACTION
 import com.borlanddev.natife_first.screens.ListFragmentDirections
 import com.borlanddev.natife_first.services.MyService
+import com.borlanddev.natife_first.viewModels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var broadcastReceiver: MyBroadcastReceiver
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +32,12 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        if (lastID != -1 && lastID in 0..19) {
-            val direction = ListFragmentDirections.actionListFragmentToDetailsFragment(lastID!!)
+        mainViewModel.valideID(lastID ?: -1)
+
+        mainViewModel.singleLiveEvent.observe(
+            this
+        ) {
+            val direction = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
 
             navController.navigate(
                 direction,
