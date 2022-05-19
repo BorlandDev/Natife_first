@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         val filter = IntentFilter().apply {
             addAction(MY_ACTION)
         }
-
         registerReceiver(broadcastReceiver, filter)
     }
 
