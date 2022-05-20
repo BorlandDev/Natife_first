@@ -1,13 +1,25 @@
 package com.borlanddev.natife_first.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.borlanddev.natife_first.data.Item
 import com.borlanddev.natife_first.databinding.ItemListBinding
 
-class ItemsAdapter(private var items: List<Item>, private var onItemClick: (Item) -> Unit) :
+class ItemsAdapter(private var onItemClick: (Item) -> Unit) :
     RecyclerView.Adapter<ItemHolder>() {
+
+    private var items: List<Item> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
+        set(newValue) {
+            field = newValue
+            notifyDataSetChanged()
+        }
+
+    fun upDateItemsList(_items: List<Item>) {
+        items = _items
+    }
 
     override fun getItemCount(): Int = items.size
 
@@ -31,5 +43,4 @@ class ItemHolder(private val binding: ItemListBinding) : RecyclerView.ViewHolder
             onItemClick.invoke(item)
         }
     }
-
 }

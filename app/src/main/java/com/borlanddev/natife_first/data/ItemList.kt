@@ -16,5 +16,4 @@ object ItemList {
     }
 
     fun getById(id: Int): Item? = items.find { it.id == id }
-
 }

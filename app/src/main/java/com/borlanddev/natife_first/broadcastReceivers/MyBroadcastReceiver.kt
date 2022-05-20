@@ -12,7 +12,6 @@ import com.borlanddev.natife_first.helpers.PREF_ID
 class MyBroadcastReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
-
         val preferences = context?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         val lastID = preferences?.getInt(PREF_ID, DEF_PREF_VALUE)
 

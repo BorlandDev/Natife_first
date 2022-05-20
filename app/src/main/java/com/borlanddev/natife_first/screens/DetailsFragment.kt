@@ -19,13 +19,14 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailsBinding.bind(view)
 
-        val currentItem = detailsViewModel.getItem(args.id)
-
-        with(binding) {
-            itemId.text = currentItem?.id.toString()
-            itemTextName.text = currentItem?.name
-            itemDescriptionNote.text = currentItem?.description
+        detailsViewModel.getItemLiveData.observe(viewLifecycleOwner) {
+            with(binding) {
+                itemId.text = it.id.toString()
+                itemTextName.text = it.name
+                itemDescriptionNote.text = it.description
+            }
         }
+        detailsViewModel.getItem(args.id)
     }
 }
 

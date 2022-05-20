@@ -20,7 +20,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var binding: FragmentListBinding
     private lateinit var listViewModel: ListViewModel
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListBinding.bind(view)
@@ -33,36 +32,31 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         listViewModel = ViewModelProvider(this, ViewModelFactory(preferences))
             .get(ListViewModel::class.java)
 
+        val itemsAdapter = ItemsAdapter {
+            listViewModel.saveID(it.id)
+            val direction =
+                ListFragmentDirections.actionListFragmentToDetailsFragment(it.id)
+            findNavController().navigate(
+                direction,
+                navOptions {
+                    anim {
+                        enter = R.anim.enter
+                        exit = R.anim.exit
+                        popEnter = R.anim.pop_enter
+                        popExit = R.anim.pop_exit
+                    }
+                })
+        }
+
+        listViewModel.items.observe(
+            viewLifecycleOwner
+        ) { itemsAdapter.upDateItemsList(it) }
+
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(context)
-
-            listViewModel.items.observe(
-                viewLifecycleOwner
-            )
-            { itemLiveData ->
-
-                recyclerView.adapter = ItemsAdapter(items = itemLiveData)
-                {
-                    listViewModel.saveID(it.id)
-
-                    val direction =
-                        ListFragmentDirections.actionListFragmentToDetailsFragment(it.id)
-
-                    findNavController().navigate(
-                        direction,
-                        navOptions {
-                            anim {
-                                enter = R.anim.enter
-                                exit = R.anim.exit
-                                popEnter = R.anim.pop_enter
-                                popExit = R.anim.pop_exit
-                            }
-                        })
-                }
-            }
+            recyclerView.adapter = itemsAdapter
         }
     }
-
 }
 
 

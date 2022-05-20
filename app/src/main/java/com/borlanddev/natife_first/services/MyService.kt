@@ -16,7 +16,6 @@ class MyService : Service() {
 
     @SuppressLint("LaunchActivityFromNotification")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
         val pendingIntent =
             PendingIntent.getBroadcast(
                 this,

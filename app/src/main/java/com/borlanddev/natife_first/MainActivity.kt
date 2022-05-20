@@ -32,13 +32,10 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        mainViewModel.valideID(lastID ?: -1)
-
-        mainViewModel.singleLiveEvent.observe(
+        mainViewModel.getLastID.observe(
             this
         ) {
             val direction = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
-
             navController.navigate(
                 direction,
                 navOptions {
@@ -50,12 +47,12 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
         }
+        mainViewModel.valideID(lastID ?: -1)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val intentForService = Intent(this, MyService::class.java)
             startForegroundService(intentForService)
         }
-
         broadcastReceiver = MyBroadcastReceiver()
 
         val filter = IntentFilter().apply {
@@ -66,12 +63,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean =
         navController.navigateUp() || super.onSupportNavigateUp()
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unregisterReceiver(broadcastReceiver)
-    }
-
 }
 
 
