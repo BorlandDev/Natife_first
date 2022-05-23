@@ -1,4 +1,4 @@
-package com.borlanddev.natife_first.screens
+package com.borlanddev.natife_first.screens.details
 
 import android.os.Bundle
 import android.view.View
@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.borlanddev.natife_first.R
 import com.borlanddev.natife_first.databinding.FragmentDetailsBinding
-import com.borlanddev.natife_first.presenter.DetailsPresenter
+import com.borlanddev.natife_first.model.Item
 
-class DetailsFragment : Fragment(R.layout.fragment_details) {
+class DetailsFragment : Fragment(R.layout.fragment_details), DetailsContract.View {
 
     private lateinit var binding: FragmentDetailsBinding
     private val args: DetailsFragmentArgs by navArgs()
@@ -17,19 +17,20 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailsBinding.bind(view)
+        detailsPresenter.attach(this)
+        detailsPresenter.getItem(args.id)
+    }
 
-        val currentItem = detailsPresenter.getCurrentItem(args.id)
-
+    override fun showCurrentItem(item: Item) {
         with(binding) {
-            itemId.text = currentItem?.id.toString()
-            itemTextName.text = currentItem?.name
-            itemDescriptionNote.text = currentItem?.description
+            itemId.text = item.id.toString()
+            itemTextName.text = item.name
+            itemDescriptionNote.text = item.description
         }
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        detailsPresenter.detach()
+    }
 }
-
-
-
-

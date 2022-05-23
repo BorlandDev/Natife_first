@@ -1,4 +1,4 @@
-package com.borlanddev.natife_first
+package com.borlanddev.natife_first.screens.main
 
 import android.content.Intent
 import android.content.IntentFilter
@@ -9,14 +9,14 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import androidx.navigation.ui.NavigationUI
+import com.borlanddev.natife_first.R
 import com.borlanddev.natife_first.broadcastReceivers.MyBroadcastReceiver
 import com.borlanddev.natife_first.helpers.KEY_LAST_ID
 import com.borlanddev.natife_first.helpers.MY_ACTION
-import com.borlanddev.natife_first.presenter.MainPresenter
-import com.borlanddev.natife_first.screens.ListFragmentDirections
+import com.borlanddev.natife_first.screens.list.ListFragmentDirections
 import com.borlanddev.natife_first.services.MyService
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContract.View {
     private lateinit var navController: NavController
     private lateinit var broadcastReceiver: MyBroadcastReceiver
     private val mainPresenter = MainPresenter()
@@ -25,28 +25,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val lastID = intent.extras?.getInt(KEY_LAST_ID)
-
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        if (mainPresenter.valideID(lastID ?: -1)) {
-            val direction =
-                ListFragmentDirections.actionListFragmentToDetailsFragment(lastID!!)
-
-            navController.navigate(
-                direction,
-                navOptions {
-                    anim {
-                        enter = R.anim.enter
-                        exit = R.anim.exit
-                        popEnter = R.anim.pop_enter
-                        popExit = R.anim.pop_exit
-                    }
-                })
-        }
-
+        val lastID = intent.extras?.getInt(KEY_LAST_ID)
+        mainPresenter.valideID(lastID ?: -1)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val intentForService = Intent(this, MyService::class.java)
@@ -58,16 +42,31 @@ class MainActivity : AppCompatActivity() {
         val filter = IntentFilter().apply {
             addAction(MY_ACTION)
         }
-
         registerReceiver(broadcastReceiver, filter)
     }
+
+    override fun goToLastItemDetails(lastID: Int) {
+        val direction =
+            ListFragmentDirections.actionListFragmentToDetailsFragment(lastID)
+
+        navController.navigate(
+            direction,
+            navOptions {
+                anim {
+                    enter = R.anim.enter
+                    exit = R.anim.exit
+                    popEnter = R.anim.pop_enter
+                    popExit = R.anim.pop_exit
+                }
+            })
+        }
 
     override fun onSupportNavigateUp(): Boolean =
         navController.navigateUp() || super.onSupportNavigateUp()
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(broadcastReceiver)
+        mainPresenter.detach()
     }
 
 }
