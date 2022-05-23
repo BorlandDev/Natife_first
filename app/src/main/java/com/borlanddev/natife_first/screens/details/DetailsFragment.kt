@@ -1,4 +1,4 @@
-package com.borlanddev.natife_first.screens
+package com.borlanddev.natife_first.screens.details
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.borlanddev.natife_first.R
 import com.borlanddev.natife_first.databinding.FragmentDetailsBinding
-import com.borlanddev.natife_first.viewModels.DetailsViewModel
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 

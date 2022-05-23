@@ -1,4 +1,4 @@
-package com.borlanddev.natife_first
+package com.borlanddev.natife_first.screens.main
 
 import android.content.Intent
 import android.content.IntentFilter
@@ -10,12 +10,12 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import androidx.navigation.ui.NavigationUI
+import com.borlanddev.natife_first.R
 import com.borlanddev.natife_first.broadcastReceivers.MyBroadcastReceiver
 import com.borlanddev.natife_first.helpers.KEY_LAST_ID
 import com.borlanddev.natife_first.helpers.MY_ACTION
-import com.borlanddev.natife_first.screens.ListFragmentDirections
+import com.borlanddev.natife_first.screens.list.ListFragmentDirections
 import com.borlanddev.natife_first.services.MyService
-import com.borlanddev.natife_first.viewModels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController

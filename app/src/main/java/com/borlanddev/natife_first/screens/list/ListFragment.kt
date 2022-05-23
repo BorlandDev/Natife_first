@@ -1,4 +1,4 @@
-package com.borlanddev.natife_first.screens
+package com.borlanddev.natife_first.screens.list
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -14,7 +14,6 @@ import com.borlanddev.natife_first.adapter.ItemsAdapter
 import com.borlanddev.natife_first.databinding.FragmentListBinding
 import com.borlanddev.natife_first.helpers.APP_PREFERENCES
 import com.borlanddev.natife_first.helpers.ViewModelFactory
-import com.borlanddev.natife_first.viewModels.ListViewModel
 
 class ListFragment : Fragment(R.layout.fragment_list) {
     private lateinit var binding: FragmentListBinding

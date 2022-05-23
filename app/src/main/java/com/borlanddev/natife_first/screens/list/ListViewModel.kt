@@ -1,4 +1,4 @@
-package com.borlanddev.natife_first.viewModels
+package com.borlanddev.natife_first.screens.list
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData

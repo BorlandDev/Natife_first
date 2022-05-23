@@ -3,7 +3,7 @@ package com.borlanddev.natife_first.broadcastReceivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.borlanddev.natife_first.MainActivity
+import com.borlanddev.natife_first.screens.main.MainActivity
 import com.borlanddev.natife_first.helpers.APP_PREFERENCES
 import com.borlanddev.natife_first.helpers.DEF_PREF_VALUE
 import com.borlanddev.natife_first.helpers.KEY_LAST_ID

@@ -15,8 +15,7 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
         if (hasActiveObservers()) {
             Log.w(
                 SINGLE_LIVE_EVENT,
-                "Multiple observers registered but only one will be notified of changes."
-            )
+                "Multiple observers registered but only one will be notified of changes.")
         }
 
         super.observe(owner) { t ->
@@ -31,11 +30,5 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
         pending.set(true)
         super.setValue(t)
     }
-
-    @MainThread
-    fun call() {
-        value = null
-    }
-
 }
 

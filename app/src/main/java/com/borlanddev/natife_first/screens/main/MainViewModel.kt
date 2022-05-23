@@ -1,4 +1,4 @@
-package com.borlanddev.natife_first.viewModels
+package com.borlanddev.natife_first.screens.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
