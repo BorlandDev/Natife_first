@@ -3,7 +3,7 @@ package com.borlanddev.natife_first.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.borlanddev.natife_first.data.Item
+import com.borlanddev.natife_first.model.Item
 import com.borlanddev.natife_first.databinding.ItemListBinding
 
 class ItemsAdapter(private var items: List<Item>, private var onItemClick: (Item) -> Unit) :

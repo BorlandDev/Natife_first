@@ -1,7 +1,11 @@
-package com.borlanddev.natife_first.data
+package com.borlanddev.natife_first.model
 
-object ItemList {
-    val items: List<Item> by lazy {
+import com.borlanddev.natife_first.presenter.DetailsContract
+import com.borlanddev.natife_first.presenter.ListContract
+import com.borlanddev.natife_first.presenter.MainContract
+
+object ItemList : DetailsContract.Model, MainContract.Model, ListContract.Model {
+    private val items: List<Item> by lazy {
         (0 until 20).map {
             Item(
                 id = it,
@@ -15,6 +19,11 @@ object ItemList {
         }
     }
 
-    fun getById(id: Int): Item? = items.find { it.id == id }
+    override fun getItemList() = items
 
+    override fun getById(id: Int): Item? = items.find { it.id == id }
+
+    override fun valideID(id: Int): Boolean {
+        return id != -1 && id <= items.size -1
+    }
 }

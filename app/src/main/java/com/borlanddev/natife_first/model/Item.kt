@@ -1,4 +1,4 @@
-package com.borlanddev.natife_first.data
+package com.borlanddev.natife_first.model
 
 import com.borlanddev.natife_first.helpers.DEF_ITEM_ID
 

@@ -12,12 +12,14 @@ import androidx.navigation.ui.NavigationUI
 import com.borlanddev.natife_first.broadcastReceivers.MyBroadcastReceiver
 import com.borlanddev.natife_first.helpers.KEY_LAST_ID
 import com.borlanddev.natife_first.helpers.MY_ACTION
+import com.borlanddev.natife_first.presenter.MainPresenter
 import com.borlanddev.natife_first.screens.ListFragmentDirections
 import com.borlanddev.natife_first.services.MyService
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var broadcastReceiver: MyBroadcastReceiver
+    private val mainPresenter = MainPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,8 +31,9 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
 
-        if (lastID != -1 && lastID in 0..19) {
-            val direction = ListFragmentDirections.actionListFragmentToDetailsFragment(lastID!!)
+        if (mainPresenter.valideID(lastID ?: -1)) {
+            val direction =
+                ListFragmentDirections.actionListFragmentToDetailsFragment(lastID!!)
 
             navController.navigate(
                 direction,
@@ -43,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
         }
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val intentForService = Intent(this, MyService::class.java)
